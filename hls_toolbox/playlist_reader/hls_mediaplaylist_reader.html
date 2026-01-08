@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Playlist Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .info-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .input-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #999;
+            font-weight: 500;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        .section-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .item-detail {
+            color: #555;
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .badge.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Media Playlist Analyzer</h1>
+            <p>Analyze HLS playlists with style</p>
+        </div>
+
+        <div class="info-card">
+            <h3>ℹ️ About This Tool</h3>
+            <p>This analyzer helps you understand HLS (HTTP Live Streaming) playlists by extracting key information:</p>
+            <p><strong>• Stream Details:</strong> Total chunks, duration, start and end times</p>
+            <p><strong>• Discontinuities:</strong> Detects EXT-X-DISCONTINUITY tags and calculates missing chunks between segments</p>
+            <p><strong>• Ad Breaks:</strong> Identifies CUE-OUT/CUE-IN markers and ad insertion points</p>
+        </div>
+
+        <div class="input-card">
+            <div class="input-group">
+                <label for="playlistUrl">📡 Playlist URL</label>
+                <input type="text" id="playlistUrl" placeholder="https://example.com/playlist.m3u8">
+            </div>
+            <div class="divider">— OR —</div>
+            <div class="input-group">
+                <label for="playlistFile">📁 Upload Playlist File</label>
+                <input type="file" id="playlistFile" accept=".m3u8,.m3u">
+            </div>
+            <button onclick="analyzePlaylist()">🚀 Analyze Playlist</button>
+        </div>
+
+        <div id="resultsContainer"></div>
+    </div>
+
+    <script>
+        async function analyzePlaylist() {
+            const url = document.getElementById('playlistUrl').value;
+            const fileInput = document.getElementById('playlistFile');
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            resultsContainer.innerHTML = '<div class="section-card loading">⏳ Analyzing playlist...</div>';
+
+            let playlistContent = '';
+
+            if (url) {
+                try {
+                    const response = await fetch(url);
+                    playlistContent = await response.text();
+                } catch (error) {
+                    resultsContainer.innerHTML = `<div class="section-card"><p class="empty-state">❌ Error fetching URL: ${error.message}</p></div>`;
+                    return;
+                }
+            } else if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                playlistContent = await file.text();
+            } else {
+                resultsContainer.innerHTML = '<div class="section-card"><p class="empty-state">⚠️ Please provide a URL or upload a file.</p></div>';
+                return;
+            }
+
+            displayResults(playlistContent);
+        }
+
+        function extractChunkNumber(line) {
+            const match = line.match(/(\d+)\./);
+            return match ? parseInt(match[1]) : null;
+        }
+
+        function displayResults(playlistContent) {
+            const lines = playlistContent.split('\n');
+            let startTimeStr = null;
+            let totalDuration = 0;
+            let chunkCount = 0;
+            const discontinuities = [];
+            const ads = [];
+            let playlistStartTimeStr = null;
+            let discontinuityCounter = 0;
+            let adCounter = 0;
+            let adStartTime = null;
+            let adDuration = null;
+            let adInfo = null;
+            let adEndTime = null;
+            let currentTime;
+            let previousChunkNumber = null;
+            let currentChunkNumber = null;
+
+            lines.forEach((line, index) => {
+                if (line.startsWith("#EXT-X-PROGRAM-DATE-TIME")) {
+                    const timeStr = line.split("#EXT-X-PROGRAM-DATE-TIME:")[1].trim();
+                    if (!startTimeStr) startTimeStr = timeStr;
+                    playlistStartTimeStr = timeStr;
+                } else if (line.startsWith("#EXTINF")) {
+                    const duration = parseFloat(line.split(":")[1].split(',')[0]);
+                    totalDuration += duration;
+                    chunkCount += 1;
+                    currentTime = calculateTime(playlistStartTimeStr, totalDuration);
+                } else if (line.startsWith("#EXT-X-DISCONTINUITY")) {
+                    // Skip first discontinuity if it's not in the first 10 lines
+                    if (discontinuityCounter === 0 && index >= 10) {
+                        discontinuityCounter++;
+                        return;
+                    }
+                    
+                    discontinuityCounter += 1;
+                    const discontinuityTime = calculateTime(playlistStartTimeStr, totalDuration);
+                    
+                    // Find the chunk numbers before and after discontinuity
+                    let chunkBefore = null;
+                    let chunkAfter = null;
+                    let lineBefore = '';
+                    let lineAfter = '';
+                    
+                    // Look backwards for the previous chunk
+                    for (let i = index - 1; i >= 0; i--) {
+                        if (!lines[i].startsWith("#")) {
+                            lineBefore = lines[i];
+                            chunkBefore = extractChunkNumber(lines[i]);
+                            if (chunkBefore !== null) break;
+                        }
+                    }
+                    
+                    // Look forwards for the next chunk
+                    for (let i = index + 1; i < lines.length; i++) {
+                        if (!lines[i].startsWith("#")) {
+                            lineAfter = lines[i];
+                            chunkAfter = extractChunkNumber(lines[i]);
+                            if (chunkAfter !== null) break;
+                        }
+                    }
+                    
+                    let missingChunks = null;
+                    if (chunkBefore !== null && chunkAfter !== null) {
+                        missingChunks = chunkAfter - chunkBefore - 1;
+                    }
+                    
+                    // Get the 3 lines context: line before, discontinuity line, line after
+                    const contextLines = [
+                        index > 0 ? lines[index - 1] : '',
+                        line,
+                        index < lines.length - 1 ? lines[index + 1] : ''
+                    ];
+                    
+                    discontinuities.push({
+                        time: discontinuityTime,
+                        number: discontinuityCounter,
+                        chunkBefore: chunkBefore,
+                        chunkAfter: chunkAfter,
+                        missingChunks: missingChunks,
+                        context: contextLines
+                    });
+                } else if (line.startsWith("#EXT-OATCLS-SCTE35")) {
+                    adInfo = line;
+                } else if (line.startsWith("#EXT-X-CUE-OUT")) {
+                    adDuration = parseFloat(line.split(":")[1].trim());
+                    adStartTime = currentTime;
+                } else if (line.startsWith("#EXT-X-CUE-IN")) {
+                    adCounter += 1;
+                    adEndTime = currentTime;
+                    if (adInfo && adDuration !== null) {
+                        ads.push({
+                            info: adInfo,
+                            duration: adDuration,
+                            start: adStartTime,
+                            end: adEndTime,
+                        });
+                        adInfo = adStartTime = adDuration = null;
+                    }
+                }
+            });
+
+            const resultsContainer = document.getElementById('resultsContainer');
+            let html = '';
+
+            if (startTimeStr) {
+                const startTime = new Date(startTimeStr);
+                const endTime = new Date(startTime.getTime() + totalDuration * 1000);
+
+                html += `
+                    <div class="results-grid">
+                        <div class="stat-card">
+                            <h3>Chunks</h3>
+                            <div class="value">${chunkCount}</div>
+                            <div class="label">Total segments</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Duration</h3>
+                            <div class="value">${Math.floor(totalDuration / 60)}m ${Math.floor(totalDuration % 60)}s</div>
+                            <div class="label">${totalDuration.toFixed(2)} seconds</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Start Time</h3>
+                            <div class="value">${startTime.toLocaleTimeString()}</div>
+                            <div class="label">${startTime.toLocaleDateString()}</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>End Time</h3>
+                            <div class="value">${endTime.toLocaleTimeString()}</div>
+                            <div class="label">${endTime.toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (discontinuities.length > 0) {
+                const totalMissing = discontinuities.reduce((sum, disc) => sum + (disc.missingChunks || 0), 0);
+                html += `
+                    <div class="section-card">
+                        <h2>Discontinuities</h2>
+                        <div class="badge">${discontinuityCounter} discontinuity found</div>
+                        ${totalMissing > 0 ? `<div class="badge warning">${totalMissing} missing chunks</div>` : ''}
+                `;
+                discontinuities.forEach(disc => {
+                    html += `
+                        <div class="item">
+                            <div class="item-title">⚡ Discontinuity #${disc.number}</div>
+                            <div class="item-detail">🕐 Time: ${disc.time.toLocaleString()}</div>
+                            <div class="item-detail">📅 ISO: ${disc.time.toISOString()}</div>
+                            ${disc.chunkBefore !== null ? `<div class="item-detail">📦 Chunk before: #${disc.chunkBefore}</div>` : ''}
+                            ${disc.chunkAfter !== null ? `<div class="item-detail">📦 Chunk after: #${disc.chunkAfter}</div>` : ''}
+                            ${disc.missingChunks !== null ? `<div class="item-detail" style="color: ${disc.missingChunks > 0 ? '#f5576c' : '#10b981'}; font-weight: 600;">⚠️ Missing chunks: ${disc.missingChunks}</div>` : '<div class="item-detail" style="color: #999;">ℹ️ Unable to determine chunk numbers</div>'}
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            if (ads.length > 0) {
+                html += `
+                    <div class="section-card">
+                        <h2>Ads Information</h2>
+                        <div class="badge">${adCounter} ad break${adCounter > 1 ? 's' : ''}</div>
+                `;
+                ads.forEach((ad, index) => {
+                    html += `
+                        <div class="item">
+                            <div class="item-title">📺 Ad Break #${index + 1}</div>
+                            <div class="item-detail">▶️ Start: ${ad.start.toLocaleString()}</div>
+                            <div class="item-detail">⏱️ Duration: ${ad.duration} seconds</div>
+                            <div class="item-detail">⏹️ End: ${ad.end.toLocaleString()}</div>
+                            <div class="item-detail" style="margin-top: 10px; font-size: 0.85em; color: #777;">ℹ️ ${ad.info}</div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            if (!startTimeStr) {
+                html = '<div class="section-card"><p class="empty-state">❌ Error: Could not find start time in playlist.</p></div>';
+            }
+
+            if (discontinuities.length === 0 && ads.length === 0 && startTimeStr) {
+                html += '<div class="section-card"><p class="empty-state">✨ No discontinuities or ads found in this playlist.</p></div>';
+            }
+
+            resultsContainer.innerHTML = html;
+        }
+
+        function calculateTime(startTimeStr, duration) {
+            const startTime = new Date(startTimeStr);
+            const currentTime = new Date(startTime.getTime() + duration * 1000);
+            return currentTime;
+        }
+    </script>
+
+</body>
+
+</html>

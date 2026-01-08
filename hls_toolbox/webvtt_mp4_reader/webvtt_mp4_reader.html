@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link href="" media="all" rel="stylesheet" /> -->
+  <script type="text/javascript" src="./dist/iso_boxer.js"></script>
+
+  <title>IsoBoxer</title>
+</head>
+
+<body>
+  parse all mdat boxes of file looking for either webvtt or TTML mp4 fragment </br></br>
+  <input type="file" id="fileInput" onchange="readFile(this)">
+</br></br></br>
+
+  <script type="text/javascript">
+    let mp4;
+
+    function readFile(input) {
+      let file = input.files[0];
+      let reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = function () {
+        mp4 = ISOBoxer.parseBuffer(reader.result);
+        document.body.innerHTML += "<br>Parsing of " + file.name + " complete.";
+        exploreMdat();
+      };
+    }
+
+    function exploreMdat() {
+      // on va chercher toutes les boites mdat du fichier 
+      const allMdatData = mp4.fetchAll('mdat');
+      // on va traiter les boites mdat une par une 
+      if (!allMdatData.length) {
+        document.body.innerHTML += "<br><br>no mdat found";
+      } else {
+        for (let j = 0; j < allMdatData.length; j++) {
+          document.body.innerHTML += "<br><br><b>mdat[" + j + "]";
+          // on extrait le payload de la boite mdat
+          const mdatData = allMdatData[j].data;
+          // on vire le header de la boite du payload récupéré
+          const buffer = mdatData.buffer.slice(mdatData.byteOffset, mdatData.byteOffset + mdatData.byteLength);
+
+          // oppotunisme total
+          // si le mdata commence par ?xml, il y a de forte chance
+          // que ce soit du ttml
+          const ttml = arrayBufferToString(mdatData);
+          if (ttml.substring(0, 5) == "<?xml") {
+            //comme ma variable est du XML, il faut passer par cette methode
+            var textNode = document.createTextNode(toto);
+            document.body.appendChild(textNode);
+          };
+
+          // de ce qui reste on fait un objet ISOBox
+          const parsedBuffer = ISOBoxer.parseBuffer(buffer);
+          // et donc on peut utiliser les fonctions de la bibliothèque
+          // on extrait toutes les boites vttc  
+          const allVttc = parsedBuffer.fetchAll("vttc")
+
+          if (!allVttc.length) {
+            document.body.innerHTML += "no webvtt found";
+          } else {
+            // on va chercher toutes les sous boites presentes dans chaque boite vttc
+            for (let i = 0; i < allVttc.length; i++) {
+              // on parse les sous boites et on affiche leur payload 
+              const vttc = allVttc[i];
+              document.body.innerHTML += "<br><br> <b>vttc[" + [i] + "]</b>";
+              for (let index = 0; index < vttc.boxes.length; index++) {
+                const element = vttc.boxes[index];
+                const payload = ISOBoxer.Utils.dataViewToString(element._raw);
+                document.body.innerHTML += "<br>-  Box Type: " + element.type;
+                document.body.innerHTML += "<br>-    Payload: " + payload.substring(8);
+              }
+            }
+          }
+        }
+      }
+      document.body.innerHTML += "<br> this is the end <br> "
+    }
+    function arrayBufferToString(buffer) {
+      let decoder = new TextDecoder("utf-8");
+      return decoder.decode(buffer);
+    }
+  </script>
+</body>
+
+</html>

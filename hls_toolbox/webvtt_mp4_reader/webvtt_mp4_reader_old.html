@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link href="" media="all" rel="stylesheet" /> -->
+  <script type="text/javascript" src="./dist/iso_boxer.js"></script>
+
+  <title>IsoBoxer</title>
+</head>
+
+<body>
+  parse mdat box from webvtt mp4 fragment </br>
+  <input type="file" id="fileInput" onchange="readFile(this)">
+
+
+  <script type="text/javascript">
+    let mp4;
+
+    function readFile(input) {
+      let file = input.files[0];
+      let reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = function () {
+        mp4 = ISOBoxer.parseBuffer(reader.result);
+        document.body.innerHTML += "<br>Parsing of " + file.name + " complete.";
+        exploreMp4();
+      };
+
+
+    }
+
+    function exploreMp4() {
+      //On extrait la boite mdat
+      const mdatData = mp4.fetch('mdat').data;
+      // on vire le header de la boite 
+      const buffer = mdatData.buffer.slice(mdatData.byteOffset, mdatData.byteOffset + mdatData.byteLength);
+      // de ce qui reste on fait un objet ISOBox
+      const parsedBuffer = ISOBoxer.parseBuffer(buffer);
+      // et donc on peut utiliser les fonctions de la bibliothèque 
+      const allVttc = parsedBuffer.fetchAll("vttc")
+      // parsing de l'ensemble des box contenu dans l'ensemble des vttc box
+      for (let i = 0; i < allVttc.length; i++) {
+        const vttc = allVttc[i];
+        document.body.innerHTML += "<br><br> <b>vttc[" + [i] + "]</b>";
+        for (let index = 0; index < vttc.boxes.length; index++) {
+          const element = vttc.boxes[index];
+          const payload = ISOBoxer.Utils.dataViewToString(element._raw);
+          console.log("  payload: " + payload.substring(4));
+          document.body.innerHTML += "<br>-  Box Type: " + element.type;
+          document.body.innerHTML += "<br>-    Payload: " + payload.substring(8);
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>

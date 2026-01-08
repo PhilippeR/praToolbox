@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "HTML en cours",
+            "url": "http://localhost:5501/${relativeFile}",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Master playlist",
+            "url": "http://localhost:5501/hls_toolbox/playlist_reader/hls_live_masterplaylist_checker.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "mp4 reader",
+            "url": "http://localhost:5501/hls_toolbox/webvtt_mp4_reader/webvtt_mp4_reader.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Master playlist",
+            "url": "http://localhost:5501/hls_toolbox/playlist_reader/masterplaylist_reader.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Media playlist",
+            "url": "http://localhost:5501/hls_toolbox/playlist_reader/mediaplaylist_reader.html",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

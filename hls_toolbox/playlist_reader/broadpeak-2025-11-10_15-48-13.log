@@ -1,0 +1,225 @@
+11-10 15:46:15.057 V/BpkCoreEngine: Loading engine... base.smartlib.browser.min.js:1:119619
+11-10 15:46:15.057 V/BpkCoreEngine: Version: 7781a9e base.smartlib.browser.min.js:1:119619
+11-10 15:46:15.057 V/BpkCoreEngine: Registering system functions... base.smartlib.browser.min.js:1:119619
+11-10 15:46:15.058 D/BpkInternalAdMgr: Native PAL manager registered base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.058 V/BpkCoreEngine: Took 1ms to load base.smartlib.browser.min.js:1:119619
+Filtering default m3u8 assets player.js:70:21
+11-10 15:46:15.370 D/BpkBrowserAppStateMgr: Initializing browser app state manager... base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.370 I/BpkAppStateMgr: Device:osName=Win32, osVersion=5.0_(Windows) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkAppStateMgr: Device:type=browser base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 D/BpkAppStateMgr: Network is available (networkType:1) base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.370 I/BpkCoreEngine: Analytics module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: Ad module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: nanoCDN module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: Monitoring module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: Diversity module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: React Native module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: OMSDK module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: SIMID module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.370 I/BpkCoreEngine: Shaka Player module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: Dash.js module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: HTML5 player module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: AVPlay module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: Sagemcom module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: HbbTV1 module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: Kaltura module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: CONNECT Player module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: RxPlayer module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: HLS.js module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: Bitmovin module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: THEOplayer module loaded (from index) base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: Video.js module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: VOPlayer module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: React Native CONNECT Player module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: React Native THEOplayer module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: React Native Bitmovin module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkCoreEngine: Chromecast module not loaded base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 D/BpkCacheHandler: Init cache handler, localStorage is available... base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.371 I/BpkSmartLib: Init SmartLib... base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkSmartLib: Version: 05.03.02.7781a9e base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 I/BpkSmartLib: Parameters:analyticsAddress=https://analytics.broadpeak.tv, nanoCDNHost=, broadpeakDomainNames=5.135.222.75,pf7.broadpeak-vcdn.com base.smartlib.browser.min.js:1:119705
+11-10 15:46:15.371 D/BpkInternalAdMgr: Ad manager version: 05.02.02 base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.371 D/BpkInternalAdMgr: Ad manager loaded base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.372 D/BpkCacheMgr: Init cache manager... base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.373 D/BpkAppStateMgr: Initializing core app state manager... base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.373 D/BpkAppStateMgr: Core app state manager is bound to the target, skipping default values... base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.373 V/BpkSmartLib: Updating nanoCDN resolving retry asyncDelay to 60000ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:15.373 D/BpkSmartLib: Setting global option TIMEOUT_NANO_CDN_REQUEST_ROUTER to 2000 base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.373 D/BpkSmartLib: Setting global option MULTICAST_ONLY to false base.smartlib.browser.min.js:1:119662
+11-10 15:46:15.373 D/BpkSmartLib: Setting global option ULTRA_LOW_LATENCY_SUPPORT to false base.smartlib.browser.min.js:1:119662
+Configuration {
+  "asset": 0,
+  "UUID": "",
+  "analyticsAddress": "https://analytics.broadpeak.tv:8443",
+  "nanoCDNHost": "192.168.1.254",
+  "broadpeakDomainNames": "",
+  "monitoringAddress": "",
+  "customParameters": "{}",
+  "adParameters": "{}",
+  "advertising": false,
+  "additionalStartupTime": 0,
+  "deviceType": "",
+  "showContentRedirectedUrls": true,
+  "nanoCDNResolvingRetryDelay": "60000",
+  "nanoCDNRequestRouterTimeout": 2000,
+  "multicastOnly": false,
+  "ultraLowLatencySupport": false,
+  "reportingMetricsReceiver": false,
+  "hlsjs": true,
+  "diversity": false
+} app.js:98:13
+Assets [
+  {
+    "manifestUri": "https://cro-ott.cdn.bouygtel.fr/simulcast/France_4/hls_fr4/index.m3u8"
+  }
+] app.js:105:13
+Updated configuration {
+  "asset": 0,
+  "UUID": "",
+  "analyticsAddress": "https://analytics.broadpeak.tv:8443",
+  "nanoCDNHost": "192.168.1.254",
+  "broadpeakDomainNames": "",
+  "monitoringAddress": "",
+  "customParameters": "{}",
+  "adParameters": "{}",
+  "advertising": false,
+  "additionalStartupTime": 0,
+  "deviceType": "",
+  "showContentRedirectedUrls": true,
+  "nanoCDNResolvingRetryDelay": "60000",
+  "nanoCDNRequestRouterTimeout": 2000,
+  "multicastOnly": false,
+  "ultraLowLatencySupport": false,
+  "reportingMetricsReceiver": false,
+  "hlsjs": true,
+  "diversity": false
+} app.js:171:13
+Filtering default m3u8 assets player.js:70:21
+App configuration loaded app.js:177:13
+11-10 15:46:15.385 I/BpkCacheMgr: Clean expired data if any... base.smartlib.browser.min.js:1:119705
+Starting default stream... app.js:115:21
+11-10 15:46:16.383 I/BpkSmartLib: [66622] Creating streaming session... base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.384 D/BpkStreamingSession: [66622] Multicast status listener set base.smartlib.browser.min.js:1:119662
+11-10 15:46:16.389 V/BpkPlayerMgr: Compatible players: generic,theoplayer,shaka,dashjs,hlsjs,bitmovin base.smartlib.browser.min.js:1:119619
+11-10 15:46:16.391 I/BpkStreamingSession: [66622] Player HLS.js attached base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.391 I/BpkStreamingSession: [66622] getURL with https://cro-ott.cdn.bouygtel.fr/simulcast/France_4/hls_fr4/index.m3u8 base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.391 I/BpkSessionHandler: [66622] Starting session... base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.391 I/BpkSessionHandler: [66622] Player:name=HLS.js, version=1.6.6 base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.391 I/BpkSessionHandler: [66622] Player:capabilities={"adTracking":true} base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 V/BpkSessionTrackerTimeline: Creating event Start... base.smartlib.browser.min.js:1:119619
+11-10 15:46:16.392 I/BpkRequestMgr: [66622] Workflow 5.5 => 5.3 (v05.03.02.7781a9e) base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]    Parameters base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       analyticsAddress=https://analytics.broadpeak.tv base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       nanoCDNHost= base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       broadpeakDomainNames=5.135.222.75,pf7.broadpeak-vcdn.com base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]    Options base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       MULTICAST_ONLY=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       LEGACY_MULTICAST_ONLY=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_REDIRECT_THIRD_PARTY_CDN=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_NANO_CDN=true base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_NANO_CDN_DURING_GET_QUERY=true base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_BROADPEAK_CDN=true base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_LOCAL_NANO_CDN_IF_CONNECTED_TO_WIFI=true base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_BKYOU_IF_BROADPEAK_CDN=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       REQUEST_NANO_CDN_PRIORITY=nanoCDN conf base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       SESSION_KEEPALIVE=enabled if broadpeak domain name base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       SESSION_KEEPALIVE_FREQUENCY=5000ms base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.392 I/BpkRequestMgr: [66622]       SESSION_TEARDOWN=enabled if broadpeak domain name base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkRequestMgr: [66622]       SESSION_REPORTING_MODE=default base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkRequestMgr: [66622]       SESSION_PRECACHE=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkRequestMgr: [66622]       TIMEOUT_NANO_CDN_REQUEST_ROUTER=2000ms base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkRequestMgr: [66622]       PIP_SESSION=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkRequestMgr: [66622]       ULTRA_LOW_LATENCY_SUPPORT=false base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkRequestMgr: [66622]       GDPR_PREFERENCE=4 base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 I/BpkSessionHandler: [66622] Session will start without keepalives/teardown base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.393 W/BpkSessionHandler: [66622] Ticket generated: MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 base.smartlib.browser.min.js:1:119748
+11-10 15:46:16.393 V/BpkSessionTrackerEncoder: Extended size from 384 to 768 base.smartlib.browser.min.js:1:119619
+11-10 15:46:16.394 V/BpkSessionTrackerTimeline: Creating event RedirectionEnd... base.smartlib.browser.min.js:1:119619
+11-10 15:46:16.394 I/BpkSessionHandler: [66622] Session status: Result success. The session has been created. (code 0, detail ) base.smartlib.browser.min.js:1:119705
+11-10 15:46:16.394 I/BpkSessionHandler: [66622] Session redirected URL: https://cro-ott.cdn.bouygtel.fr/simulcast/France_4/hls_fr4/index.m3u8 base.smartlib.browser.min.js:1:119705
+Parsing begin player.js:131:41
+Begin query = undefined player.js:134:41
+11-10 15:46:18.009 D/BpkMetricsMgr: [66622] Player changed layer to 255kbps base.smartlib.browser.min.js:1:119662
+11-10 15:46:18.010 D/BpkSessionHandler: [66622] Ad tracking disabled (advertising not activated) base.smartlib.browser.min.js:1:119662
+11-10 15:46:18.010 V/BpkSessionTrackerTimeline: Creating event FirstImage... base.smartlib.browser.min.js:1:119619
+11-10 15:46:18.010 I/BpkMetricsMgr: [66622] Streaming session started (255kbps,14:45:38.437) base.smartlib.browser.min.js:1:119705
+11-10 15:46:18.011 D/BpkCacheMgr: [66622] Using cache keepalive manager... base.smartlib.browser.min.js:1:119662
+11-10 15:46:18.012 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (3 events, 18 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:18.012 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:18.486 D/BpkMetricsMgr: [66622] Player is buffering base.smartlib.browser.min.js:1:119662
+11-10 15:46:18.486 V/BpkSessionTrackerTimeline: Creating event BufferingStart... base.smartlib.browser.min.js:1:119619
+11-10 15:46:18.598 W/BpkHlsJsPlayerAdapter: HLS.js error:bufferStalledError (type: mediaError) base.smartlib.browser.min.js:1:119748
+11-10 15:46:21.115 D/BpkMetricsMgr: [66622] Player changed layer to 1225kbps base.smartlib.browser.min.js:1:119662
+11-10 15:46:21.116 D/BpkMetricsMgr: [66622] Player changed layer, before: 255kbps, now: 1225kbps base.smartlib.browser.min.js:1:119662
+11-10 15:46:21.116 V/BpkSessionTrackerTimeline: Creating event LayerSwitch... base.smartlib.browser.min.js:1:119619
+11-10 15:46:23.018 V/BpkMetrics: Add watching range, duration 466ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:23.020 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (5 events, 26 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:23.021 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:24.278 V/BpkSessionTrackerTimeline: Creating event StallStop... base.smartlib.browser.min.js:1:119619
+11-10 15:46:24.278 D/BpkMetricsMgr: [66622] Player stalled for 5792ms base.smartlib.browser.min.js:1:119662
+11-10 15:46:28.023 V/BpkMetrics: Add watching range, duration 4189ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:28.025 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (6 events, 29 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:28.025 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:33.028 V/BpkMetrics: Add watching range, duration 9216ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:33.029 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (6 events, 29 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:33.029 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:38.030 V/BpkMetrics: Add watching range, duration 14189ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:38.032 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (6 events, 29 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:38.032 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:39.721 D/BpkMetricsMgr: [66622] Player changed layer to 1750kbps base.smartlib.browser.min.js:1:119662
+11-10 15:46:39.721 D/BpkMetricsMgr: [66622] Player changed layer, before: 1225kbps, now: 1750kbps base.smartlib.browser.min.js:1:119662
+11-10 15:46:39.721 V/BpkSessionTrackerTimeline: Creating event LayerSwitch... base.smartlib.browser.min.js:1:119619
+11-10 15:46:43.038 V/BpkMetrics: Add watching range, duration 19199ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:43.039 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:43.039 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:48.039 V/BpkMetrics: Add watching range, duration 24214ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:48.039 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:48.039 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:53.041 V/BpkMetrics: Add watching range, duration 29186ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:53.042 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:53.042 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:46:58.048 V/BpkMetrics: Add watching range, duration 34197ms base.smartlib.browser.min.js:1:119619
+11-10 15:46:58.049 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:46:58.049 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:03.050 V/BpkMetrics: Add watching range, duration 39210ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:03.051 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:03.051 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:08.056 V/BpkMetrics: Add watching range, duration 44203ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:08.057 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:08.058 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:13.059 V/BpkMetrics: Add watching range, duration 49228ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:13.059 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:13.059 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:18.060 V/BpkMetrics: Add watching range, duration 54233ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:18.060 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:18.060 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:23.060 V/BpkMetrics: Add watching range, duration 59214ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:23.061 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:23.061 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:28.062 V/BpkMetrics: Add watching range, duration 64237ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:28.063 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:28.063 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:33.063 V/BpkMetrics: Add watching range, duration 69243ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:33.064 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:33.064 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:38.696 V/BpkMetrics: Add watching range, duration 74853ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:38.697 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:38.697 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:43.763 V/BpkMetrics: Add watching range, duration 79910ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:43.763 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:43.763 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:48.798 V/BpkMetrics: Add watching range, duration 84964ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:48.799 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:48.799 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:53.801 V/BpkMetrics: Add watching range, duration 89966ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:53.802 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:53.802 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:47:59.138 V/BpkMetrics: Add watching range, duration 95299ms base.smartlib.browser.min.js:1:119619
+11-10 15:47:59.139 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:47:59.139 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:48:04.177 V/BpkMetrics: Add watching range, duration 100345ms base.smartlib.browser.min.js:1:119619
+11-10 15:48:04.178 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:48:04.179 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705
+11-10 15:48:09.179 V/BpkMetrics: Add watching range, duration 105357ms base.smartlib.browser.min.js:1:119619
+11-10 15:48:09.181 D/BpkSessionTrackerEncoder: Timeline encoder generated uncompressed data (7 events, 34 bytes) base.smartlib.browser.min.js:1:119662
+11-10 15:48:09.181 I/BpkCacheMgr: Storing keepalive-MjExODQ5MDE3NjI3ODU5NzYzOTM0NzU4MDM4 in cache... base.smartlib.browser.min.js:1:119705

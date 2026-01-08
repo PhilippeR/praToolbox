@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Playlist Comparator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .input-group:hover {
+            border-color: #667eea;
+            background: #f0f1ff;
+        }
+
+        .input-group h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group h3::before {
+            content: "📊";
+            font-size: 1.3rem;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input[type="file"] {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background: #5568d3;
+        }
+
+        .btn-compare {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-compare:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-compare:active {
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .table-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .comparison-table td {
+            width: 50%;
+            vertical-align: top;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 968px) {
+            .input-section,
+            .table-container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Master Playlist Comparator</h1>
+        
+        <div class="card">
+            <div class="input-section">
+                <div class="input-group">
+                    <h3>Playlist 1</h3>
+                    <input type="text" id="urlInput1" placeholder="HLS manifest URL">
+                    <input type="file" id="fileInput1" accept=".m3u8">
+                </div>
+                <div class="input-group">
+                    <h3>Playlist 2</h3>
+                    <input type="text" id="urlInput2" placeholder="HLS manifest URL">
+                    <input type="file" id="fileInput2" accept=".m3u8">
+                </div>
+            </div>
+            <button class="btn-compare" onclick="processManifests()">Compare Playlists</button>
+        </div>
+
+        <div class="card">
+            <h2>📊 Resolution, Bandwidth and Codecs</h2>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table id="resultTable1">
+                        <thead>
+                            <tr>
+                                <th>Resolution</th>
+                                <th>Bandwidth</th>
+                                <th>Avg Bandwidth</th>
+                                <th>Codec</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="4" class="empty-state">No data loaded</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <table id="resultTable2">
+                        <thead>
+                            <tr>
+                                <th>Resolution</th>
+                                <th>Bandwidth</th>
+                                <th>Avg Bandwidth</th>
+                                <th>Codec</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="4" class="empty-state">No data loaded</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🔍 Detailed Component Comparison</h2>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Playlist 1 Component</th>
+                            <th>Playlist 2 Component</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonBody">
+                        <tr><td colspan="2" class="empty-state">No comparison available</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function parseCodec(codec) {
+            let level, profile;
+
+            if (codec.startsWith('avc1')) {
+                const hex = codec.split('.')[1];
+                const profileIdc = parseInt(hex.substring(0, 2), 16);
+                const levelIdc = parseInt(hex.substring(4, 6), 16);
+
+                switch (profileIdc) {
+                    case 66: profile = 'Baseline'; break;
+                    case 77: profile = 'Main'; break;
+                    case 100: profile = 'High'; break;
+                    default: profile = 'Unknown';
+                }
+
+                level = (levelIdc / 10).toFixed(1);
+            } else if (codec.startsWith('mp4a')) {
+                const hex = codec.split('.')[1];
+                const audioObjectType = parseInt(hex.split('.')[0], 16);
+                const samplingFrequencyIndex = parseInt(hex.split('.')[1], 16);
+
+                switch (audioObjectType) {
+                    case 1: profile = 'Main'; break;
+                    case 2: profile = 'LC'; break;
+                    case 3: profile = 'SSR'; break;
+                    case 5: profile = 'HE-AAC'; break;
+                    case 29: profile = 'HE-AACv2'; break;
+                    default: profile = 'Unknown';
+                }
+
+                const samplingFrequencies = [96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350, 0, 0, 0];
+                level = samplingFrequencies[samplingFrequencyIndex] || 'Unknown';
+            } else {
+                profile = 'Unknown';
+                level = 'Unknown';
+            }
+            return { profile, level };
+        }
+
+        async function processManifests() {
+            const manifest1 = await processManifest('urlInput1', 'fileInput1', 'resultTable1');
+            const manifest2 = await processManifest('urlInput2', 'fileInput2', 'resultTable2');
+            if (manifest1 && manifest2) {
+                comparePlaylists(manifest1, manifest2);
+            }
+        }
+
+        async function processManifest(urlInputId, fileInputId, resultTableId) {
+            let manifestContent = '';
+
+            const url = document.getElementById(urlInputId).value;
+            const file = document.getElementById(fileInputId).files[0];
+
+            if (url) {
+                try {
+                    const response = await fetch(url);
+                    manifestContent = await response.text();
+                } catch (error) {
+                    alert("Error loading URL: " + error.message);
+                    return null;
+                }
+            } else if (file) {
+                manifestContent = await file.text();
+            } else {
+                return null;
+            }
+
+            const streamInfoLines = manifestContent.split('\n').filter(line => line.startsWith('#EXT-X-STREAM-INF'));
+            const results = [];
+
+            streamInfoLines.forEach(line => {
+                const bandwidthMatch = line.match(/BANDWIDTH=(\d+)/);
+                const averageBandwidthMatch = line.match(/AVERAGE-BANDWIDTH=(\d+)/);
+                const resolutionMatch = line.match(/RESOLUTION=(\d+x\d+)/);
+                const codecsMatch = line.match(/CODECS="([^"]+)"/);
+
+                let resolution = resolutionMatch ? resolutionMatch[1] : 'N/A';
+                let bandwidth = bandwidthMatch ? parseInt(bandwidthMatch[1], 10) : 0;
+                let avgBandwidth = averageBandwidthMatch ? parseInt(averageBandwidthMatch[1], 10) : 'N/A';
+                let codecs = codecsMatch ? codecsMatch[1] : 'N/A';
+
+                const formatBandwidth = bw => bw >= 1000000 ? (bw / 1000000).toFixed(2) + ' Mb/s' : (bw / 1000).toFixed(2) + ' kb/s';
+                bandwidth = formatBandwidth(bandwidth);
+                avgBandwidth = avgBandwidth !== 'N/A' ? formatBandwidth(avgBandwidth) : 'N/A';
+
+                const codecProfileMatch = codecs.match(/avc1\.([0-9a-fA-F]+)/);
+                let codecInfo = codecs;
+                if (codecProfileMatch) {
+                    const codecProfileStr = parseCodec(codecProfileMatch[0]);
+                    codecInfo = `H.264<br>Profile ${codecProfileStr.profile}<br>Level ${codecProfileStr.level}<br><small>(${codecs})</small>`;
+                }
+
+                results.push({ resolution, bandwidth, avgBandwidth, codecInfo });
+            });
+
+            results.sort((a, b) => {
+                const [widthA, heightA] = a.resolution.split('x').map(Number);
+                const [widthB, heightB] = b.resolution.split('x').map(Number);
+                return (widthB * heightB) - (widthA * heightA);
+            });
+
+            const tbody = document.getElementById(resultTableId).querySelector('tbody');
+            tbody.innerHTML = '';
+
+            if (results.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No streams found</td></tr>';
+            } else {
+                results.forEach(result => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${result.resolution}</td><td>${result.bandwidth}</td><td>${result.avgBandwidth}</td><td>${result.codecInfo}</td>`;
+                    tbody.appendChild(row);
+                });
+            }
+
+            return manifestContent;
+        }
+
+        function comparePlaylists(manifest1, manifest2) {
+            const components1 = manifest1.split('\n').filter(line => line.startsWith('#EXT-X-STREAM-INF') || line.startsWith('#EXT-X-MEDIA'));
+            const components2 = manifest2.split('\n').filter(line => line.startsWith('#EXT-X-STREAM-INF') || line.startsWith('#EXT-X-MEDIA'));
+
+            const maxLength = Math.max(components1.length, components2.length);
+            const comparisonBody = document.getElementById('comparisonBody');
+            comparisonBody.innerHTML = '';
+
+            if (maxLength === 0) {
+                comparisonBody.innerHTML = '<tr><td colspan="2" class="empty-state">No components to compare</td></tr>';
+                return;
+            }
+
+            for (let i = 0; i < maxLength; i++) {
+                const component1 = components1[i] || '';
+                const component2 = components2[i] || '';
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${component1}</td><td>${component2}</td>`;
+                comparisonBody.appendChild(row);
+            }
+        }
+    </script>
+</body>
+</html>
