@@ -23,6 +23,11 @@ SRT_HOST="192.168.1.100"
 # Ex: "latency=200&passphrase=secret"
 SRT_OPTIONS=""
 
+# Source vidéo :
+#   "" (vide)               → mire noire animée (comportement original)
+#   "/chemin/fichier.mp4"   → lecture en boucle du fichier MP4
+INPUT_FILE=""
+
 # Relance automatique de ffmpeg en cas de déconnexion/arrêt
 # "true" = relance automatique (défaut) / "false" = arrêt définitif
 AUTO_RESTART="true"
@@ -88,28 +93,35 @@ trap cleanup SIGINT SIGTERM
 # Validation de la configuration
 # =============================================================================
 validate_config() {
-    # Vérifier AUTO_RESTART
     if [[ "$AUTO_RESTART" != "true" && "$AUTO_RESTART" != "false" ]]; then
         echo "ERREUR : AUTO_RESTART doit être 'true' ou 'false' (valeur actuelle : '$AUTO_RESTART')" >&2
         exit 1
     fi
 
-    # Vérifier le mode
     if [[ "$SRT_MODE" != "listener" && "$SRT_MODE" != "caller" ]]; then
         echo "ERREUR : SRT_MODE doit être 'listener' ou 'caller' (valeur actuelle : '$SRT_MODE')" >&2
         exit 1
     fi
 
-    # En mode caller, vérifier que SRT_HOST est défini
     if [[ "$SRT_MODE" == "caller" && -z "$SRT_HOST" ]]; then
         echo "ERREUR : SRT_HOST doit être défini en mode caller" >&2
         exit 1
     fi
 
-    # Vérifier que ffmpeg est disponible
     if ! command -v "$FFMPEG_BIN" &>/dev/null; then
         echo "ERREUR : ffmpeg introuvable dans le PATH" >&2
         exit 1
+    fi
+
+    if [[ -n "$INPUT_FILE" ]]; then
+        if [[ ! -f "$INPUT_FILE" ]]; then
+            echo "ERREUR : INPUT_FILE introuvable : '$INPUT_FILE'" >&2
+            exit 1
+        fi
+        if [[ ! -r "$INPUT_FILE" ]]; then
+            echo "ERREUR : INPUT_FILE non lisible : '$INPUT_FILE'" >&2
+            exit 1
+        fi
     fi
 }
 
@@ -128,10 +140,29 @@ build_srt_url() {
 }
 
 # =============================================================================
+# Construction des arguments d'entrée ffmpeg selon la source
+# Stockés dans le tableau global FFMPEG_INPUT_ARGS
+# =============================================================================
+build_ffmpeg_input_args() {
+    if [[ -n "$INPUT_FILE" ]]; then
+        # Fichier MP4 : boucle infinie, lecture temps réel
+        FFMPEG_INPUT_ARGS=( -stream_loop -1 -re -i "$INPUT_FILE" )
+    else
+        # Mire noire animée avec timecode
+        FFMPEG_INPUT_ARGS=(
+            -f lavfi -re -i "color=black:size=1280x720:rate=25"
+            -f lavfi -i "sine=frequency=1000:sample_rate=48000:duration=0"
+            -vf "drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:\
+text='%{localtime\:%Hh%Mm%Ss}\:%{eif\:mod(n\,25)\:d\:2}':\
+fontsize=72:fontcolor=white:x=(w-tw)/2:y=(h-th)/2"
+        )
+    fi
+}
+
+# =============================================================================
 # Préparation
 # =============================================================================
 
-# Créer le répertoire de log si besoin
 LOG_DIR=$(dirname "$LOG_FILE")
 mkdir -p "$LOG_DIR" 2>/dev/null || {
     LOG_FILE="/tmp/srt_stream.log"
@@ -141,23 +172,37 @@ mkdir -p "$LOG_DIR" 2>/dev/null || {
 validate_config
 
 SRT_URL=$(build_srt_url)
+build_ffmpeg_input_args  # remplit le tableau FFMPEG_INPUT_ARGS
+
+# Arguments de sortie communs aux deux sources
+FFMPEG_OUTPUT_ARGS=(
+    -c:v libx264 -preset veryfast -tune zerolatency -pix_fmt yuv420p -r 25
+    -b:v 2M -minrate 2M -maxrate 2M -bufsize 2M -x264-params nal-hdr=cbr
+    -c:a aac -b:a 128k -ar 48000 -ac 2
+    -f mpegts
+)
 
 # =============================================================================
 # Démarrage
 # =============================================================================
 log_info "============================================"
 log_info "Démarrage du script SRT Stream"
-log_info "Mode SRT    : $SRT_MODE"
+log_info "Mode SRT     : $SRT_MODE"
 if [[ "$SRT_MODE" == "caller" ]]; then
-    log_info "Cible       : ${SRT_HOST}:${SRT_PORT}"
+    log_info "Cible        : ${SRT_HOST}:${SRT_PORT}"
 else
-    log_info "Écoute      : 0.0.0.0:${SRT_PORT}"
+    log_info "Écoute       : 0.0.0.0:${SRT_PORT}"
+fi
+if [[ -n "$INPUT_FILE" ]]; then
+    log_info "Source       : fichier MP4 en boucle → $INPUT_FILE"
+else
+    log_info "Source       : mire noire animée (par défaut)"
 fi
 log_info "Auto-restart : $AUTO_RESTART"
-[[ -n "$SRT_OPTIONS" ]] && log_info "Options SRT : $SRT_OPTIONS"
-log_info "URL SRT     : $SRT_URL"
-log_info "Log         : $LOG_FILE"
-log_info "FFmpeg      : $($FFMPEG_BIN -version 2>&1 | head -1)"
+[[ -n "$SRT_OPTIONS" ]] && log_info "Options SRT  : $SRT_OPTIONS"
+log_info "URL SRT      : $SRT_URL"
+log_info "Log          : $LOG_FILE"
+log_info "FFmpeg       : $($FFMPEG_BIN -version 2>&1 | head -1)"
 log_info "============================================"
 
 # =============================================================================
@@ -168,23 +213,14 @@ SESSION=0
 while true; do
     SESSION=$((SESSION + 1))
     log_info "--- Session #$SESSION : lancement de ffmpeg (mode=$SRT_MODE) ---"
+    log_info "Commande : $FFMPEG_BIN ${FFMPEG_INPUT_ARGS[*]} ${FFMPEG_OUTPUT_ARGS[*]} $SRT_URL"
 
-    $FFMPEG_BIN \
-        -f lavfi -re -i "color=black:size=1280x720:rate=25" \
-        -f lavfi -i "sine=frequency=1000:sample_rate=48000:duration=0" \
-        -vf "drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:\
-text='%{localtime\:%Hh%Mm%Ss}\:%{eif\:mod(n\,25)\:d\:2}':\
-fontsize=72:fontcolor=white:x=(w-tw)/2:y=(h-th)/2" \
-        -c:v libx264 -preset veryfast -tune zerolatency -pix_fmt yuv420p -r 25 \
-        -b:v 2M -minrate 2M -maxrate 2M -bufsize 2M -x264-params nal-hdr=cbr \
-        -c:a aac -b:a 128k -ar 48000 -ac 2 \
-        -f mpegts "$SRT_URL" \
+    $FFMPEG_BIN "${FFMPEG_INPUT_ARGS[@]}" "${FFMPEG_OUTPUT_ARGS[@]}" "$SRT_URL" \
         2> >(
             while IFS= read -r line; do
                 # Décommenter pour afficher les logs bruts ffmpeg :
                 # echo "[ffmpeg] $line"
 
-                # Détection connexion SRT
                 if echo "$line" | grep -qiE "(srt.*connect|accepted.*connection|client.*connect|new.*session)"; then
                     if [[ "$SRT_MODE" == "listener" ]]; then
                         log_connect "Nouveau client connecté sur le port $SRT_PORT"
@@ -193,7 +229,6 @@ fontsize=72:fontcolor=white:x=(w-tw)/2:y=(h-th)/2" \
                     fi
                 fi
 
-                # Détection déconnexion SRT
                 if echo "$line" | grep -qiE "(srt.*disconnect|connection.*lost|broken.*pipe|eof|client.*gone|connection.*reset|peer.*closed)"; then
                     if [[ "$SRT_MODE" == "listener" ]]; then
                         log_disconn "Client déconnecté du port $SRT_PORT"
@@ -202,7 +237,6 @@ fontsize=72:fontcolor=white:x=(w-tw)/2:y=(h-th)/2" \
                     fi
                 fi
 
-                # Détection erreur fatale
                 if echo "$line" | grep -qiE "^(Error|Fatal)"; then
                     log_error "FFmpeg : $line"
                 fi
@@ -212,12 +246,10 @@ fontsize=72:fontcolor=white:x=(w-tw)/2:y=(h-th)/2" \
     FFMPEG_PID=$!
     log_info "FFmpeg démarré (PID=$FFMPEG_PID) → $SRT_URL"
 
-    # Attendre la fin de ffmpeg
     wait "$FFMPEG_PID"
     EXIT_CODE=$?
     FFMPEG_PID=""
 
-    # SIGINT (130) ou SIGTERM (143) : le cleanup s'en charge
     if [[ $EXIT_CODE -eq 130 || $EXIT_CODE -eq 143 ]]; then
         log_info "FFmpeg terminé par signal (code=$EXIT_CODE)"
         break
